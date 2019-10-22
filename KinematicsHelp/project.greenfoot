@@ -1,9 +1,10 @@
 #Greenfoot project file
+class.Ball.image=ball.png
 class.MyWorld.image=Wall.jpg
 editor.fx.0.height=722
-editor.fx.0.width=800
+editor.fx.0.width=1045
 editor.fx.0.x=329
-editor.fx.0.y=294
+editor.fx.0.y=245
 height=545
 package.numDependencies=0
 package.numTargets=2
