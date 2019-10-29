@@ -35,6 +35,7 @@ public class Ball extends Actor
         }
         setLocation(getX() + (int) xVel, getY() - (int) yVel);
         yVel--;
+        getWorld().addObject(new Dot(), getX(), getY());
     }    
     
     public String calculate() {
@@ -63,16 +64,11 @@ public class Ball extends Actor
             + " degrees\nFinal Velocity: " + df.format(finalVel)
             + " m/s\nDistance: " + df.format(distance)
             + " m\nAcceleration: " + df.format(acc)
-            + " m/s^2\nTime: " + df.format(time) + " seconds"
-            + " \nxVel: " + xVel + "\nyVel: " + yVel;
+            + " m/s^2\nTime: " + df.format(time) + " seconds";
         
             GreenfootImage image = new GreenfootImage(str, 16, Color.BLACK, null);
             getWorld().getBackground().drawImage(image, 410, 5);
         
         return str;
-    }
-    
-    public void moveOnPath() {
-        
     }
 }
