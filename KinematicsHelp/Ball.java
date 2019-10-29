@@ -1,5 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import javax.swing.*;
+import java.text.DecimalFormat;
 /**
  * Write a description of class Ball here.
  * 
@@ -12,72 +13,66 @@ public class Ball extends Actor
      * Act - do whatever the Ball wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    private double xVel;
+    private double yVel;
+    private double finalVel;
+    private double acc;
+    private double time;
+    private double distance;
     
-    private boolean xChecked = false;
-    private boolean yChecked = false;
-    private String inputXValue;
-    private String inputYValue;
+    private boolean checked = false;
     private String inputVelocity;
     private String inputAngle;
     
     public void act() 
     {
-        if ( !xChecked )
+        if ( !checked )
         {
-            inputXValue = JOptionPane.showInputDialog("Please input an x value");
-            xChecked = true;
-        }
-        if ( !yChecked )
-        {
-            inputYValue = JOptionPane.showInputDialog("Please input a y value");
-            yChecked = true;
-        }
-        if (inputVelocity == null) {
             inputVelocity = JOptionPane.showInputDialog("Please input an initial velocity");
-        }
-        if (inputAngle == null) {
             inputAngle = JOptionPane.showInputDialog("Please input a launch angle");
+            checked = true;
+            calculate();
         }
-        setLocation(Integer.parseInt(inputXValue), Integer.parseInt(inputYValue));
-        calculate();
+        setLocation(getX() + (int) xVel, getY() - (int) yVel);
+        yVel--;
     }    
     
     public String calculate() {
-        double xVel;
-        double yVel;
-        double finalVel;
-        double acc;
-        double time;
-        double distance;
+        DecimalFormat df = new DecimalFormat("##.###");
         //x = (vInitial)(time) + .5(acc)((time * time));
-        xVel = Double.parseDouble(inputVelocity) * Math.cos(Double.parseDouble(inputAngle));
-        yVel = Double.parseDouble(inputVelocity) * Math.sin(Double.parseDouble(inputAngle));
+        xVel = Double.parseDouble(inputVelocity) * Math.cos(Double.parseDouble(inputAngle) * (3.14 / 180));
+        yVel = Double.parseDouble(inputVelocity) * Math.sin(Double.parseDouble(inputAngle) * (3.14 / 180));
 
         // Solve for time
         time = (yVel) / (9.8);
         time *= 2;
+        time = Math.abs(time);
         
         // Solve for distance traveled.
         distance = xVel * time;
         
         // Solve for acceleration in x-direction.
-        acc = 2 * (distance - (xVel * time)) / (time * time);
+        acc = 2 * (distance - ((xVel * time) / (time * time)));
         
         // Solve for final velocity
         double finalVelY = -9.8 * time;
         finalVel = Math.sqrt(Math.pow(xVel, 2) + Math.pow(finalVelY, 2));
         
         String str = "Velocity: " + inputVelocity 
-            + "\nAngle: " + inputAngle 
-            + "\nFinal Velocity: " + finalVel
-            + "\nDistance: " + distance
-            + "\nAcceleration: " + acc
-            + "\nTime: " + time;
+            + " m/s\nAngle: " + inputAngle 
+            + " degrees\nFinal Velocity: " + df.format(finalVel)
+            + " m/s\nDistance: " + df.format(distance)
+            + " m\nAcceleration: " + df.format(acc)
+            + " m/s^2\nTime: " + df.format(time) + " seconds"
+            + " \nxVel: " + xVel + "\nyVel: " + yVel;
         
-        getWorld().showText(str, 475, 50);
+            GreenfootImage image = new GreenfootImage(str, 16, Color.BLACK, null);
+            getWorld().getBackground().drawImage(image, 410, 5);
         
         return str;
-
+    }
+    
+    public void moveOnPath() {
         
     }
 }
