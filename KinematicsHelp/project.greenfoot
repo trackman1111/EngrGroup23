@@ -1,5 +1,6 @@
 #Greenfoot project file
 class.Ball.image=ball.png
+class.Button.image=fingerprint.jpg
 class.Car.image=autos_01.png
 class.CarWorld.image=fingerprint.jpg
 class.Dot.image=Dot_img.png
