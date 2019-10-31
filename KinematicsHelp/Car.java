@@ -14,6 +14,7 @@ public class Car extends Actor
      */
     private boolean checked = false;
     private int inputVelocity;
+    private int deccelerationValue;
     private int initialX = 100;
     
     public void act() 
@@ -34,6 +35,7 @@ public class Car extends Actor
         if ( !checked )
         {
             inputVelocity = Integer.parseInt(JOptionPane.showInputDialog("Please input a velocity in meters per second"));
+            deccelerationValue = Integer.parseInt(JOptionPane.showInputDialog("Please input a decceleration value in meters per second"));
             checked = true;
         }
         return inputVelocity;
