@@ -29,25 +29,32 @@ public class Ramp extends Actor
     {
         if ( !checked )
         {
-           inputRampAngle = checkAngle();
-           getWorld().showText(inputRampAngle + "", 100, 100);
-           resizeRamp();
-           checked = true;
+          inputRampAngle = checkAngle();
+          getWorld().showText(inputRampAngle + "", 100, 100);
+          resizeRamp();
+          checked = true;
         }
-       findAcceleration();
-       findFinalVelocity();
-       getWorld().showText("The Acceleration is:\n" + findAcceleration(), 450, 100);
-       getWorld().showText("The Final Velocity is:\n" + findFinalVelocity(), 450, 200);
+      findAcceleration();
+      findFinalVelocity();
+      getWorld().showText("The Length of the Ramp is:\n" + 300 + " meters", 425, 50);
+      getWorld().showText("The Acceleration is:\n" + findAcceleration() + " m/s/s", 425, 125);
+      getWorld().showText("The Final Velocity is:\n" + findFinalVelocity() + " m/s", 425, 200);
     }
     public int checkAngle() {
-        return Integer.parseInt(JOptionPane.showInputDialog("Please input an angle in degrees between 1 & 89"));    
+        return Integer.parseInt(JOptionPane.showInputDialog("Please input an angle in degrees between 20 & 70"));    
     }
     
     public void resizeRamp() {
       GreenfootImage newImage = getImage();
       newImage.scale(newImage.getWidth() - (int)(300 * Math.cos((90 - inputRampAngle) * (3.14 / 180))) 
        + 100, (newImage.getHeight() - (int)(300 * Math.sin((90 - inputRampAngle) * (3.14 / 180)))) + 100);
-        }
+       
+       
+        getWorld().addObject(new RampBall(inputRampAngle, getY() + newImage.getHeight()/2),
+        getX() - newImage.getWidth()/2 , 
+        getY() - newImage.getHeight() / 2 - 2);
+     }
+
         
     public double findAcceleration() {
       return (9.8 * Math.sin((90 - inputRampAngle) * (3.14 / 180)));    
