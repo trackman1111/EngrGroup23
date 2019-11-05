@@ -19,6 +19,8 @@ public class Ball extends Actor
     private double acc;
     private double time;
     private double distance;
+    private double xVelDisplay = 18;
+    private double yVelDisplay = 10;
     
     private boolean checked = false;
     private String inputVelocity;
@@ -28,21 +30,28 @@ public class Ball extends Actor
     {
         if ( !checked )
         {
-            inputVelocity = JOptionPane.showInputDialog("Please input an initial velocity");
+            inputVelocity = JOptionPane.showInputDialog("Please input a positive initial velocity");
             inputAngle = JOptionPane.showInputDialog("Please input a launch angle");
             checked = true;
             calculate();
         }
-        setLocation(getX() + (int) xVel, getY() - (int) yVel);
-        yVel--;
-        getWorld().addObject(new Dot(), getX(), getY());
+            setLocation(getX() + (int) xVelDisplay, getY() - (int) yVelDisplay);
+            yVelDisplay--;
+            getWorld().addObject(new Dot(), getX(), getY());
+            if (getY() >= 351) {
+                Greenfoot.stop();
+            }
     }    
     
     public String calculate() {
         DecimalFormat df = new DecimalFormat("##.###");
         //x = (vInitial)(time) + .5(acc)((time * time));
-        xVel = Double.parseDouble(inputVelocity) * Math.cos(Double.parseDouble(inputAngle) * (3.14 / 180));
-        yVel = Double.parseDouble(inputVelocity) * Math.sin(Double.parseDouble(inputAngle) * (3.14 / 180));
+        double inputVel = Double.parseDouble(inputVelocity);
+        if (inputVel < 0) {
+            inputVel = Math.abs(inputVel);
+        }
+        xVel = inputVel * Math.cos(Double.parseDouble(inputAngle) * (3.14 / 180));
+        yVel = inputVel * Math.sin(Double.parseDouble(inputAngle) * (3.14 / 180));
 
         // Solve for time
         time = (yVel) / (9.8);
@@ -59,7 +68,7 @@ public class Ball extends Actor
         double finalVelY = -9.8 * time;
         finalVel = Math.sqrt(Math.pow(xVel, 2) + Math.pow(finalVelY, 2));
         
-        String str = "Velocity: " + inputVelocity 
+        String str = "Velocity: " + inputVel 
             + " m/s\nAngle: " + inputAngle 
             + " degrees\nFinal Velocity: " + df.format(finalVel)
             + " m/s\nDistance: " + df.format(distance)

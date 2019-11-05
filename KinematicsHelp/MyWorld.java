@@ -17,7 +17,7 @@ public class MyWorld extends World
     {
         super(600, 400, 1);
         addObject(new Ball(), 60, 350);
-        addObject(new Line(), 300, 370);
-        setPaintOrder(Ball.class, Dot.class, Line.class);
+        //addObject(new Line(), 300, 370);
+        setPaintOrder(Ball.class, Dot.class);
     }
 }
