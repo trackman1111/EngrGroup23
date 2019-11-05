@@ -38,7 +38,7 @@ public class Ball extends Actor
             setLocation(getX() + (int) xVelDisplay, getY() - (int) yVelDisplay);
             yVelDisplay--;
             getWorld().addObject(new Dot(), getX(), getY());
-            if (getY() >= 351) {
+            if (getY() >= 376) {
                 Greenfoot.stop();
             }
     }    
@@ -62,7 +62,7 @@ public class Ball extends Actor
         distance = xVel * time;
         
         // Solve for acceleration in x-direction.
-        acc = 2 * (distance - ((xVel * time) / (time * time)));
+        acc = xVel / time;
         
         // Solve for final velocity
         double finalVelY = -9.8 * time;
