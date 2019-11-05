@@ -16,11 +16,11 @@ public class Ball extends Actor
     private double xVel;
     private double yVel;
     private double finalVel;
-    private double acc;
     private double time;
     private double distance;
-    private double xVelDisplay = 18;
-    private double yVelDisplay = 10;
+    private double maxHeight;
+    private double xVelDisplay = 15;
+    private double yVelDisplay = 15;
     
     private boolean checked = false;
     private String inputVelocity;
@@ -31,21 +31,23 @@ public class Ball extends Actor
         if ( !checked )
         {
             inputVelocity = JOptionPane.showInputDialog("Please input a positive initial velocity");
-            inputAngle = JOptionPane.showInputDialog("Please input a launch angle");
+            inputAngle = JOptionPane.showInputDialog("Please input a launch angle between 5 and 90 degrees");
             checked = true;
             calculate();
         }
-            setLocation(getX() + (int) xVelDisplay, getY() - (int) yVelDisplay);
+            setLocation(getX() + (int) (xVelDisplay * Math.cos(Math.toRadians(Double.parseDouble(inputAngle)))),
+                getY() - (int) (yVelDisplay * Math.sin(Math.toRadians(Double.parseDouble(inputAngle)))));
             yVelDisplay--;
             getWorld().addObject(new Dot(), getX(), getY());
-            if (getY() >= 376) {
-                Greenfoot.stop();
+            if (getY() >= 371) {
+                xVelDisplay = 0;
+                yVelDisplay = 0;
+                getWorld().addObject(new Button2(), 300, 200);
             }
     }    
     
     public String calculate() {
         DecimalFormat df = new DecimalFormat("##.###");
-        //x = (vInitial)(time) + .5(acc)((time * time));
         double inputVel = Double.parseDouble(inputVelocity);
         if (inputVel < 0) {
             inputVel = Math.abs(inputVel);
@@ -61,9 +63,8 @@ public class Ball extends Actor
         // Solve for distance traveled.
         distance = xVel * time;
         
-        // Solve for acceleration in x-direction.
-        acc = xVel / time;
-        
+        // Solve for maximum height
+        maxHeight = yVel * time;
         // Solve for final velocity
         double finalVelY = -9.8 * time;
         finalVel = Math.sqrt(Math.pow(xVel, 2) + Math.pow(finalVelY, 2));
@@ -72,7 +73,8 @@ public class Ball extends Actor
             + " m/s\nAngle: " + inputAngle 
             + " degrees\nFinal Velocity: " + df.format(finalVel)
             + " m/s\nDistance: " + df.format(distance)
-            + " m\nAcceleration: " + df.format(acc)
+            + " m\nMaximum Height: " + df.format(maxHeight)
+            + " m\nGravity: " + "-9.8"
             + " m/s^2\nTime: " + df.format(time) + " seconds";
         
             GreenfootImage image = new GreenfootImage(str, 16, Color.BLACK, null);
