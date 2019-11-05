@@ -13,31 +13,39 @@ public class Car extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     private boolean checked = false;
-    private int inputVelocity;
-    private int deccelerationValue;
+    private double inputVelocity;
+    private double displayVelocity = 20;
+    private double deccelerationValue;
     private int initialX = 100;
     
     public void act() 
     {
         checkVelocity();
-        move(inputVelocity);
-        if ( inputVelocity > 0 )
+        move((int)displayVelocity);
+        if ( displayVelocity > 0 )
         {
-            inputVelocity--;
+            displayVelocity -= 1 * deccelerationValue;
         }
         else
         {
-            getWorld().showText("Your car traveled " + (getX() - initialX) + " meters", 300, 100 );
+           calculateBrakingDistance(inputVelocity, deccelerationValue);
         }
     }
-    public int checkVelocity()
+    public double checkVelocity()
     {
         if ( !checked )
         {
-            inputVelocity = Integer.parseInt(JOptionPane.showInputDialog("Please input a velocity in meters per second"));
-            deccelerationValue = Integer.parseInt(JOptionPane.showInputDialog("Please input a decceleration value in meters per second"));
+            inputVelocity = Double.parseDouble(JOptionPane.showInputDialog("Please input a velocity in meters per second"));
+            deccelerationValue = Double.parseDouble(JOptionPane.showInputDialog("Please input a decceleration value in meters per second"));
             checked = true;
         }
         return inputVelocity;
+    }
+    public void calculateBrakingDistance(double velocity, double decceleration)
+    {
+        double time = velocity / decceleration;
+        double distance = (.5 * velocity * time );
+        getWorld().showText("Time: " + time + " \nDistance: " + distance, 300, 300);
+        
     }
 }
