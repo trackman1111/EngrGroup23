@@ -11,12 +11,12 @@ public class Ramp extends Actor
     
     private boolean checked = false;
     private int inputRampAngle;
-    
+    private int screenSize;
     public Ramp() {
        setImage(new GreenfootImage("ramp.jpg"));
        GreenfootImage image = getImage();
-       image.scale(image.getWidth() - 700, image.getHeight() - 700);
-       setImage(image);
+       screenSize = 600;
+       image.scale(screenSize, screenSize);
       
       
     }
@@ -29,7 +29,7 @@ public class Ramp extends Actor
     {
         if ( !checked )
         {
-          inputRampAngle = checkAngle();
+            inputRampAngle = checkAngle();
           getWorld().showText(inputRampAngle + "", 100, 100);
           resizeRamp();
           checked = true;
@@ -45,19 +45,27 @@ public class Ramp extends Actor
     }
     
     public void resizeRamp() {
-      GreenfootImage newImage = getImage();
-      newImage.scale(newImage.getWidth() - (int)(300 * Math.cos((90 - inputRampAngle) * (3.14 / 180))) 
-       + 100, (newImage.getHeight() - (int)(300 * Math.sin((90 - inputRampAngle) * (3.14 / 180)))) + 100);
+        GreenfootImage newImage = getImage();
+        if ( inputRampAngle >= 45 )
+        {
+            newImage.scale(screenSize - (int) (screenSize * Math.sin(Math.toRadians((inputRampAngle-45) * 2 ))), screenSize);
+            setLocation(newImage.getWidth()/2, newImage.getHeight()/2);
+        }
+        if ( inputRampAngle < 45 )
+        {
+            newImage.scale(screenSize, screenSize - (int) (screenSize * Math.cos(Math.toRadians(inputRampAngle * 2 ))));
+            setLocation(screenSize - newImage.getWidth()/2, screenSize - newImage.getHeight()/2);
+        }
        
        
         getWorld().addObject(new RampBall(inputRampAngle, getY() + newImage.getHeight()/2),
-        getX() - newImage.getWidth()/2 , 
-        getY() - newImage.getHeight() / 2 - 2);
+        getX() - newImage.getWidth()/2 + 1, 
+        getY() - newImage.getHeight() / 2 + 1);
      }
 
         
     public double findAcceleration() {
-      return (9.8 * Math.sin((90 - inputRampAngle) * (3.14 / 180)));    
+      return (9.8 * Math.sin((inputRampAngle) * (3.14 / 180)));    
         }
         
     public double findFinalVelocity() {

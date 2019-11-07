@@ -67,11 +67,9 @@ public class Ball extends Actor
         maxHeight = yVel * time;
         // Solve for final velocity
         double finalVelY = -9.8 * time;
-        finalVel = Math.sqrt(Math.pow(xVel, 2) + Math.pow(finalVelY, 2));
         
         String str = "Velocity: " + inputVel 
             + " m/s\nAngle: " + inputAngle 
-            + " degrees\nFinal Velocity: " + df.format(finalVel)
             + " m/s\nDistance: " + df.format(distance)
             + " m\nMaximum Height: " + df.format(maxHeight)
             + " m\nGravity: " + "-9.8"

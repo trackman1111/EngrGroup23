@@ -16,12 +16,13 @@ public class RampBall extends Actor
     private double currentChangeX = 0;
     private double currentChangeY = 0;
     private boolean checked = false;
+    private double speed;
     private int stop;
     public RampBall(int tempAngle, int stoppingY)
     {
         angle = tempAngle;
         stop = stoppingY;
-        
+        speed = 0;
     }
     public void act() 
     {
@@ -32,10 +33,11 @@ public class RampBall extends Actor
           currentChangeY = getY();
           checked = true;
         }
-        if ( getY() < stop)
+        if ( !isAtEdge())
         {
-            move(angle, 4);
+            move(angle, speed);
         }
+        speed += .1;
       // Add your action code here.
     }   
      
