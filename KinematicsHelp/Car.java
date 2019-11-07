@@ -18,13 +18,18 @@ public class Car extends Actor
     private double deccelerationValue;
     private int initialX = 100;
     
+    public Car()
+    {
+        GreenfootImage image = getImage();
+        image.scale(image.getWidth() * 2, image.getHeight() * 2);
+    }
     public void act() 
     {
         checkVelocity();
-        move((int)displayVelocity);
         if ( displayVelocity > 0 )
         {
-            displayVelocity -= 1 * deccelerationValue;
+            move((int)displayVelocity);
+            displayVelocity -= .3 + (1 * (deccelerationValue/inputVelocity));
         }
         else
         {
@@ -45,7 +50,7 @@ public class Car extends Actor
     {
         double time = velocity / decceleration;
         double distance = (.5 * velocity * time );
-        getWorld().showText("Time: " + time + " \nDistance: " + distance, 300, 300);
+        getWorld().showText("Time to stop: " + time + " seconds \nDistance traveled: " + distance + " meters", 300, 300);
         
     }
 }

@@ -16,7 +16,11 @@ public class CarWorld extends World
     public CarWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(1000, 800, 1); 
-        addObject(new Car(),100,400);
+        
+        super(1000, 600, 1);
+        GreenfootImage image = new GreenfootImage("road.jpg");
+        image.scale(1000,600);
+        setBackground(image);
+        addObject(new Car(),100,450);
     }
 }

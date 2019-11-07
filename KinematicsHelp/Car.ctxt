@@ -2,9 +2,11 @@
 comment0.target=Car
 comment0.text=\n\ Write\ a\ description\ of\ class\ Car\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=
-comment1.target=void\ act()
+comment1.target=Car()
 comment2.params=
-comment2.target=double\ checkVelocity()
-comment3.params=velocity\ decceleration
-comment3.target=void\ calculateBrakingDistance(double,\ double)
-numComments=4
+comment2.target=void\ act()
+comment3.params=
+comment3.target=double\ checkVelocity()
+comment4.params=velocity\ decceleration
+comment4.target=void\ calculateBrakingDistance(double,\ double)
+numComments=5
