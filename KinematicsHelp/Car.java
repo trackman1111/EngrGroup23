@@ -46,6 +46,7 @@ public class Car extends Actor
         else
         {
            calculateBrakingDistance(inputVelocity, deccelerationValue);
+           getWorld().addObject(new Button2(3), 300, 200);
         }
     }
     public double checkVelocity()

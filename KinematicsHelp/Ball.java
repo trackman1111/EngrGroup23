@@ -42,7 +42,7 @@ public class Ball extends Actor
             if (getY() >= 371) {
                 xVelDisplay = 0;
                 yVelDisplay = 0;
-                getWorld().addObject(new Button2(), 300, 200);
+                getWorld().addObject(new Button2(1), 300, 200);
             }
     }    
     
