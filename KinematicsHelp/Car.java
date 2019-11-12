@@ -14,14 +14,16 @@ public class Car extends Actor
      */
     private boolean checked = false;
     private double inputVelocity;
-    private double displayVelocity = 20;
+    private double displayVelocity = 12;
     private double deccelerationValue;
     private int initialX = 100;
+    private boolean hasMadeSound;
     
     public Car()
     {
         GreenfootImage image = getImage();
         image.scale(image.getWidth() * 2, image.getHeight() * 2);
+        hasMadeSound = false;
     }
     public void act() 
     {
@@ -29,7 +31,17 @@ public class Car extends Actor
         if ( displayVelocity > 0 )
         {
             move((int)displayVelocity);
-            displayVelocity -= .3 + (1 * (deccelerationValue/inputVelocity));
+            displayVelocity -= .1 + (deccelerationValue/inputVelocity);
+            if ( !hasMadeSound && (deccelerationValue/inputVelocity) > .2 )
+            {
+                Greenfoot.playSound("cars046.wav");
+                hasMadeSound = true;
+            }
+            else if( !hasMadeSound )
+            {
+                Greenfoot.playSound("cars047.wav");
+                hasMadeSound = true;
+            }
         }
         else
         {
