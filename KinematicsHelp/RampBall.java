@@ -18,11 +18,13 @@ public class RampBall extends Actor
     private boolean checked = false;
     private double speed;
     private int stop;
+    private boolean hasMadeSound;
     public RampBall(int tempAngle, int stoppingY)
     {
         angle = tempAngle;
         stop = stoppingY;
         speed = 0;
+        hasMadeSound = false;
     }
     public void act() 
     {
@@ -36,8 +38,14 @@ public class RampBall extends Actor
         if ( !isAtEdge())
         {
             move(angle, speed);
+        if ( !hasMadeSound)
+        {
+           Greenfoot.playSound("bowling1.wav");
+           hasMadeSound = true;
+             }
         }
         speed += .1;
+
       // Add your action code here.
     }   
      
