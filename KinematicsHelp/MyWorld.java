@@ -17,7 +17,11 @@ public class MyWorld extends World
     {
         super(600, 400, 1);
         addObject(new Ball(), 60, 370);
-        //addObject(new Line(), 300, 370);
+        ExitButton eB = new ExitButton();
+        GreenfootImage image = new GreenfootImage("BackButton2.png");
+        image.scale(50, 50);
+        eB.setImage(image);
+        addObject(eB, 555, 45);
         setPaintOrder(Ball.class, Dot.class);
     }
 }

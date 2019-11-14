@@ -32,8 +32,8 @@ public class Ball extends Actor
     {
         if ( !checked )
         {
-                inputVelocity = JOptionPane.showInputDialog("Please input a positive initial velocity");
-                inputAngle = JOptionPane.showInputDialog("Please input a launch angle between 5 and 90 degrees");
+            inputVelocity = JOptionPane.showInputDialog("Please input a positive initial velocity");
+            inputAngle = JOptionPane.showInputDialog("Please input a launch angle between 5 and 90 degrees");
             checked = true;
             calculate();
         }
@@ -86,7 +86,7 @@ public class Ball extends Actor
             + " m/s^2\nTime: " + df.format(time) + " seconds";
         
             GreenfootImage image = new GreenfootImage(str, 16, Color.BLACK, null);
-            getWorld().getBackground().drawImage(image, 410, 5);
+            getWorld().getBackground().drawImage(image, 25, 5);
         
         return str;
     }

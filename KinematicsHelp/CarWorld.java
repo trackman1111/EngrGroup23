@@ -22,5 +22,10 @@ public class CarWorld extends World
         image.scale(1000,600);
         setBackground(image);
         addObject(new Car(),100,450);
+        ExitButton eB = new ExitButton();
+        GreenfootImage image1 = new GreenfootImage("BackButton2.png");
+        image1.scale(50, 50);
+        eB.setImage(image1);
+        addObject(eB, 555, 45);
     }
 }
