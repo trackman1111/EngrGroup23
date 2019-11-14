@@ -26,6 +26,6 @@ public class CarWorld extends World
         GreenfootImage image1 = new GreenfootImage("BackButton2.png");
         image1.scale(50, 50);
         eB.setImage(image1);
-        addObject(eB, 555, 45);
+        addObject(eB, 955, 45);
     }
 }
