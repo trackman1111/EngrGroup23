@@ -12,6 +12,7 @@ public class Ramp extends Actor
     private boolean checked = false;
     private int inputRampAngle;
     private int screenSize;
+    private int inputLength;
     public Ramp() {
        setImage(new GreenfootImage("ramp.jpg"));
        GreenfootImage image = getImage();
@@ -29,19 +30,24 @@ public class Ramp extends Actor
     {
         if ( !checked )
         {
-            inputRampAngle = checkAngle();
+          inputRampAngle = checkAngle();
+          inputLength = checkLength();
           getWorld().showText(inputRampAngle + "", 100, 100);
           resizeRamp();
           checked = true;
         }
       findAcceleration();
       findFinalVelocity();
-      getWorld().showText("The Length of the Ramp is:\n" + 300 + " meters", 425, 50);
-      getWorld().showText("The Acceleration is:\n" + findAcceleration() + " m/s/s", 425, 125);
+      getWorld().showText("The Length of the Ramp is:\n" + inputLength + " meters", 425, 100);
+      getWorld().showText("The Acceleration is:\n" + findAcceleration() + " m/s/s", 425, 150);
       getWorld().showText("The Final Velocity is:\n" + findFinalVelocity() + " m/s", 425, 200);
     }
     public int checkAngle() {
         return Integer.parseInt(JOptionPane.showInputDialog("Please input an angle in degrees between 20 & 70"));    
+    }
+    public int checkLength()
+    {
+        return Integer.parseInt(JOptionPane.showInputDialog("Please input the length of the ramp"));   
     }
     
     public void resizeRamp() {
@@ -69,7 +75,7 @@ public class Ramp extends Actor
         }
         
     public double findFinalVelocity() {
-      return (Math.sqrt(2 * findAcceleration() * 300));    
+      return (Math.sqrt(2 * findAcceleration() * inputLength));    
         }
 }
 

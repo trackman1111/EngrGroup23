@@ -18,12 +18,16 @@ public class Car extends Actor
     private double deccelerationValue;
     private int initialX = 100;
     private boolean hasMadeSound;
+    private GreenfootSound fastBrakeSound;
+    private GreenfootSound slowBrakeSound;
     
     public Car()
     {
         GreenfootImage image = getImage();
         image.scale(image.getWidth() * 2, image.getHeight() * 2);
         hasMadeSound = false;
+        fastBrakeSound = new GreenfootSound("cars046.wav");
+        slowBrakeSound = new GreenfootSound("cars047.wav");
     }
     public void act() 
     {
@@ -34,12 +38,12 @@ public class Car extends Actor
             displayVelocity -= .1 + (deccelerationValue/inputVelocity);
             if ( !hasMadeSound && (deccelerationValue/inputVelocity) > .2 )
             {
-                Greenfoot.playSound("cars046.wav");
+                fastBrakeSound.play();
                 hasMadeSound = true;
             }
             else if( !hasMadeSound )
             {
-                Greenfoot.playSound("cars047.wav");
+                slowBrakeSound.play();
                 hasMadeSound = true;
             }
         }
@@ -47,6 +51,8 @@ public class Car extends Actor
         {
            calculateBrakingDistance(inputVelocity, deccelerationValue);
            getWorld().addObject(new Button2(3), 300, 200);
+           fastBrakeSound.stop();
+           slowBrakeSound.stop();
         }
     }
     public double checkVelocity()

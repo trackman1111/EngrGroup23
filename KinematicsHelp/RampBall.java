@@ -38,15 +38,21 @@ public class RampBall extends Actor
         if ( !isAtEdge())
         {
             move(angle, speed);
-        if ( !hasMadeSound)
-        {
-           Greenfoot.playSound("bowling1.wav");
-           hasMadeSound = true;
-             }
+            if ( !hasMadeSound)
+            {
+                Greenfoot.playSound("bowling1.wav");
+                hasMadeSound = true;
+            }
         }
+        else
+        {
+            getWorld().addObject(new Button2(2), 400, 50);
+        }
+        
+        
         speed += .1;
 
-      // Add your action code here.
+        // Add your action code here.
     }   
      
     
