@@ -15,7 +15,10 @@ public class MainMenu extends World
      */
     public MainMenu()
     {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
+        // Create a new world with 780 x 600 cells with a cell size of 1x1 pixels.
         super(780, 600, 1); 
+        addObject(new MenuSelectCar(), 400 , 400);
+        addObject(new MenuSelectLaunch(), 600 , 400);
+        addObject(new MenuSelectRamp(), 200 , 400);
     }
 }
