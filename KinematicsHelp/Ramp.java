@@ -54,8 +54,8 @@ public class Ramp extends Actor
         GreenfootImage newImage = getImage();
         if ( inputRampAngle >= 45 )
         {
-            newImage.scale(screenSize - (int) (screenSize * Math.sin(Math.toRadians((inputRampAngle-45) * 2 ))), screenSize);
-            setLocation(newImage.getWidth()/2, newImage.getHeight()/2);
+           newImage.scale(screenSize - (int) (screenSize * Math.sin(Math.toRadians((inputRampAngle-45) * 2 ))), screenSize);
+           setLocation(newImage.getWidth()/2, newImage.getHeight()/2);
         }
         if ( inputRampAngle < 45 )
         {
