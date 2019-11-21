@@ -38,12 +38,12 @@ public class Ramp extends Actor
         }
       findAcceleration();
       findFinalVelocity();
-      getWorld().showText("The Length of the Ramp is:\n" + inputLength + " meters", 425, 100);
-      getWorld().showText("The Acceleration is:\n" + findAcceleration() + " m/s/s", 425, 150);
-      getWorld().showText("The Final Velocity is:\n" + findFinalVelocity() + " m/s", 425, 200);
+      getWorld().showText("The Length of the Ramp is:\n" + inputLength + " meters", 425, 200);
+      getWorld().showText("The Acceleration is:\n" + findAcceleration() + " m/s/s", 425, 250);
+      getWorld().showText("The Final Velocity is:\n" + findFinalVelocity() + " m/s", 425, 300);
     }
     public int checkAngle() {
-        return Integer.parseInt(JOptionPane.showInputDialog("Please input an angle in degrees between 20 & 70"));    
+        return Integer.parseInt(JOptionPane.showInputDialog("Please input an angle in degrees between 5 & 85"));    
     }
     public int checkLength()
     {
@@ -64,15 +64,15 @@ public class Ramp extends Actor
         }
        
        
-        getWorld().addObject(new RampBall(inputRampAngle, getY() + newImage.getHeight()/2),
+        getWorld().addObject(new RampBall(inputRampAngle, getY() + newImage.getHeight()/2, this),
         getX() - newImage.getWidth()/2 + 1, 
         getY() - newImage.getHeight() / 2 + 1);
      }
 
         
-    public double findAcceleration() {
+     public double findAcceleration() {
       return (9.8 * Math.sin((inputRampAngle) * (3.14 / 180)));    
-        }
+    }
         
     public double findFinalVelocity() {
       return (Math.sqrt(2 * findAcceleration() * inputLength));    

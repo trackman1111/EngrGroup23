@@ -19,15 +19,20 @@ public class RampBall extends Actor
     private double speed;
     private int stop;
     private boolean hasMadeSound;
-    public RampBall(int tempAngle, int stoppingY)
+    private Ramp ramp;
+    public RampBall(int tempAngle, int stoppingY, Ramp ramp)
     {
         angle = tempAngle;
         stop = stoppingY;
         speed = 0;
         hasMadeSound = false;
+        this.ramp = ramp;
     }
     public void act() 
     {
+        if ( getX() < ramp.getX() && getY() <ramp.getY())
+            turnTowards(ramp.getX() + ramp.getImage().getWidth()/2,
+                        ramp.getY() + ramp.getImage().getHeight()/2);
         GreenfootImage image = getImage();
         if ( !checked ) 
         {
@@ -37,7 +42,7 @@ public class RampBall extends Actor
         }
         if ( !isAtEdge())
         {
-            move(angle, speed);
+            move((int)speed);
             if ( !hasMadeSound)
             {
                 Greenfoot.playSound("bowling1.wav");
@@ -46,7 +51,7 @@ public class RampBall extends Actor
         }
         else
         {
-            getWorld().addObject(new Button2(2), 400, 50);
+            getWorld().addObject(new Button2(2), 400, 100);
         }
         
         
@@ -55,12 +60,5 @@ public class RampBall extends Actor
         // Add your action code here.
     }   
      
-    
-    public void move(double angle, double distance) {
-       angle = Math.toRadians(angle);
-       currentChangeX += Math.cos(angle) * distance;
-       currentChangeY += Math.sin(angle) * distance;
-       setLocation((int) (currentChangeX), (int) (currentChangeY));
    
-    }
 }
