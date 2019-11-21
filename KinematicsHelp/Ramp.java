@@ -30,17 +30,26 @@ public class Ramp extends Actor
     {
         if ( !checked )
         {
-          inputRampAngle = checkAngle();
-          inputLength = checkLength();
-          getWorld().showText(inputRampAngle + "", 100, 100);
-          resizeRamp();
-          checked = true;
+          try{
+              inputRampAngle = checkAngle();
+              inputLength = checkLength();
+              getWorld().showText(inputRampAngle + "", 100, 100);
+              resizeRamp();
+              checked = true;
+            }
+            catch(Exception e)
+            {
+                JOptionPane.showMessageDialog(null, "Try a valid input");
+            }
         }
-      findAcceleration();
-      findFinalVelocity();
-      getWorld().showText("The Length of the Ramp is:\n" + inputLength + " meters", 425, 200);
-      getWorld().showText("The Acceleration is:\n" + findAcceleration() + " m/s/s", 425, 250);
-      getWorld().showText("The Final Velocity is:\n" + findFinalVelocity() + " m/s", 425, 300);
+        else
+        {
+            findAcceleration();
+            findFinalVelocity();
+            getWorld().showText("The Length of the Ramp is:\n" + inputLength + " meters", 425, 200);
+            getWorld().showText("The Acceleration is:\n" + findAcceleration() + " m/s/s", 425, 250);
+            getWorld().showText("The Final Velocity is:\n" + findFinalVelocity() + " m/s", 425, 300);
+        }
     }
     public int checkAngle() {
         return Integer.parseInt(JOptionPane.showInputDialog("Please input an angle in degrees between 5 & 85"));    

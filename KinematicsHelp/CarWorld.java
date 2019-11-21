@@ -18,6 +18,7 @@ public class CarWorld extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         
         super(1000, 600, 1);
+        setPaintOrder(Car.class, RandomCars.class);
         GreenfootImage image = new GreenfootImage("road.jpg");
         image.scale(1000,600);
         setBackground(image);
@@ -27,5 +28,10 @@ public class CarWorld extends World
         image1.scale(50, 50);
         eB.setImage(image1);
         addObject(eB, 955, 45);
+        for ( int i = 0; i < 5; i++)
+        {
+            addObject( new RandomCars(), Greenfoot.getRandomNumber(1000), 
+                                         Greenfoot.getRandomNumber(100) + 400); 
+        }
     }
 }

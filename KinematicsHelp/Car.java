@@ -30,38 +30,48 @@ public class Car extends Actor
         slowBrakeSound = new GreenfootSound("cars047.wav");
     }
     public void act() 
-    {
-        checkVelocity();
-        if ( displayVelocity > 0 )
+    {   if (!checked)
         {
-            move((int)displayVelocity);
-            displayVelocity -= .1 + (deccelerationValue/inputVelocity);
-            if ( !hasMadeSound && (deccelerationValue/inputVelocity) > .2 )
-            {
-                fastBrakeSound.play();
-                hasMadeSound = true;
-            }
-            else if( !hasMadeSound )
-            {
-                slowBrakeSound.play();
-                hasMadeSound = true;
-            }
+            checkVelocity();
         }
         else
         {
-           calculateBrakingDistance(inputVelocity, deccelerationValue);
-           getWorld().addObject(new Button2(3), 300, 200);
-           fastBrakeSound.stop();
-           slowBrakeSound.stop();
+            if ( displayVelocity > 0 )
+            {
+                move((int)displayVelocity);
+                displayVelocity -= .1 + (deccelerationValue/inputVelocity);
+                if ( !hasMadeSound && (deccelerationValue/inputVelocity) > .2 )
+                {
+                    fastBrakeSound.play();
+                    hasMadeSound = true;
+                }
+                else if( !hasMadeSound )
+                {
+                    slowBrakeSound.play();
+                    hasMadeSound = true;
+                }
+            }
+            else
+            {
+               calculateBrakingDistance(inputVelocity, deccelerationValue);
+               getWorld().addObject(new Button2(3), 300, 200);
+               fastBrakeSound.stop();
+               slowBrakeSound.stop();
+            }
         }
     }
     public double checkVelocity()
     {
-        if ( !checked )
+        try
         {
             inputVelocity = Double.parseDouble(JOptionPane.showInputDialog("Please input a velocity in meters per second"));
             deccelerationValue = Double.parseDouble(JOptionPane.showInputDialog("Please input a decceleration value in meters per second"));
             checked = true;
+        }
+        catch(Exception e)
+        {
+            checked = false;
+            JOptionPane.showMessageDialog(null, "Please Enter Valid Input");
         }
         return inputVelocity;
     }

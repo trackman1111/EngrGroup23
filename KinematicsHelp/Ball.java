@@ -32,15 +32,26 @@ public class Ball extends Actor
     {
         if ( !checked )
         {
-            inputVelocity = JOptionPane.showInputDialog("Please input a positive initial velocity");
-            inputAngle = JOptionPane.showInputDialog("Please input a launch angle between 5 and 90 degrees");
-            checked = true;
-            calculate();
+            try
+            {
+                inputVelocity = JOptionPane.showInputDialog("Please input a valid positive initial velocity");
+                inputAngle = JOptionPane.showInputDialog("Please input a valid launch angle between 5 and 90 degrees");
+                checked = true;
+                calculate();
+            } 
+            catch(Exception e)
+            {
+                checked = false;
+                JOptionPane.showMessageDialog(null, "Please input valid inputs");
+            }
+            
         }
-        if (!hasMadeSoundLaunch) {
-            Greenfoot.playSound("LaunchSound.wav");
-            hasMadeSoundLaunch = true;
-        }
+        else
+        {
+            if (!hasMadeSoundLaunch) {
+                Greenfoot.playSound("LaunchSound.wav");
+                hasMadeSoundLaunch = true;
+            }
             setLocation(getX() + (int) (xVelDisplay * Math.cos(Math.toRadians(Double.parseDouble(inputAngle)))),
                 getY() - (int) (yVelDisplay * Math.sin(Math.toRadians(Double.parseDouble(inputAngle)))));
             yVelDisplay--;
@@ -54,6 +65,7 @@ public class Ball extends Actor
                 yVelDisplay = 0;
                 getWorld().addObject(new Button2(1), 300, 200);
             }
+        }
     }    
     
     public String calculate() {
