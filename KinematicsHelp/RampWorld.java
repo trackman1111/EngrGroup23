@@ -24,6 +24,6 @@ public class RampWorld extends World
         GreenfootImage image = new GreenfootImage("BackButton2.png");
         image.scale(50, 50);
         eB.setImage(image);
-        addObject(eB, 555, 45);
+        addObject(eB, 45, 45);
     }
 }
